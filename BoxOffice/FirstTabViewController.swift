@@ -32,21 +32,26 @@ class FirstTabViewController: UIViewController, UITableViewDataSource {
         self.movies.count
     }
     
+    @objc func didRecieveMoviesNotification(_ noti: Notification)
+    {
+        guard let movies: [Movie] =  noti.userInfo?["movies"] as? [Movie] else {return}
+        
+        self.movies = movies
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        //무비목록 요청
-        DispatchQueue.global().async {
-            if let movies = requestMovies(orderType: self.orderType) {
-                self.movies = movies
-                self.tableView.reloadData()
-            } else {
-                print("빈 영화목록")
-            }
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(self.didRecieveMoviesNotification(_:)), name: DidReceiveMoviesNotification, object: nil)
         
+        requestMovies(orderType: 0)
     }
     
 
