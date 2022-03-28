@@ -9,7 +9,6 @@ import UIKit
 
 class FirstTabViewController: UIViewController, UITableViewDataSource {
     
-    var orderType:Int = 0
     var movies: [Movie] = []
     let cellIdentifier = "firstTabTableCell"
     @IBOutlet weak var tableView: UITableView!
@@ -21,7 +20,7 @@ class FirstTabViewController: UIViewController, UITableViewDataSource {
         cell.titleLabel.text = movies[indexPath.row].title
         cell.rateLabel.text = movies[indexPath.row].tableRateString
         cell.dateLabel.text = movies[indexPath.row].tableDateString
-        if let emptyImage = generateEmptyUIImage(with: CGSize(width: 99, height: 141)) {
+        if let emptyImage = generateEmptyUIImage(with: CGSize(width: 100, height: 140)) {
             cell.thumbImageView?.image = emptyImage
         }
         
@@ -32,7 +31,8 @@ class FirstTabViewController: UIViewController, UITableViewDataSource {
             DispatchQueue.main.async {
                 if let index:IndexPath = self.tableView.indexPath(for: cell) {
                     if index.row == indexPath.row {
-                    cell.thumbImageView?.image = UIImage(data: imageData)
+
+                        cell.thumbImageView?.image = UIImage(data: imageData)
                     }
                 }
             }
@@ -61,22 +61,24 @@ class FirstTabViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         // Do any additional setup after loading the view.
+        self.tableView.contentInset = UIEdgeInsets.zero
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.didRecieveMoviesNotification(_:)), name: DidReceiveMoviesNotification, object: nil)
         
-        requestMovies(orderType: 0)
+        let currentOrderType = SettingInfo.shared.orderType
+        requestMovies(orderType: currentOrderType.rawValue)
+        self.navigationItem.title = orderTypeDescription(currentOrderType)
     }
     
 
-    /*
-    // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
