@@ -9,6 +9,7 @@ import Foundation
 
 let DidReceiveMoviesNotification: Notification.Name = Notification.Name("DisReceiveMovies")
 
+
 func requestMovies(orderType: Int) {
         
     if let url: URL = URL(string: "https://connect-boxoffice.run.goorm.io/movies?order_type=\(orderType)") {

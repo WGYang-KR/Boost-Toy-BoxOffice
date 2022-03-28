@@ -25,6 +25,20 @@ class FirstTabViewController: UIViewController, UITableViewDataSource {
             cell.thumbImageView?.image = emptyImage
         }
         
+        DispatchQueue.global().async {
+            guard let imageURL: URL = URL(string: self.movies[indexPath.row].thumb) else { return }
+            guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
+            
+            DispatchQueue.main.async {
+                if let index:IndexPath = self.tableView.indexPath(for: cell) {
+                    if index.row == indexPath.row {
+                    cell.thumbImageView?.image = UIImage(data: imageData)
+                    }
+                }
+            }
+                    
+        }
+        
         return cell
     }
     
