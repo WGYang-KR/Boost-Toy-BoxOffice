@@ -106,7 +106,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="정렬 기준" id="V18-Vf-A4O">
-                        <barButtonItem key="rightBarButtonItem" title="설정" id="ZM4-zx-XaI"/>
+                        <barButtonItem key="rightBarButtonItem" title="설정" id="ZM4-zx-XaI">
+                            <connections>
+                                <action selector="touchUpOrderTypeButton:" destination="BYZ-38-t0r" id="0Tr-bl-4QW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="O1z-PW-88o" id="xph-7F-D1j"/>
@@ -202,7 +206,7 @@
         <scene sceneID="urY-1G-esS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fIj-A6-KpQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Table" id="VLk-02-xED"/>
+                    <tabBarItem key="tabBarItem" title="Table" image="ic_table" id="VLk-02-xED"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5HR-ZI-g69">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
@@ -221,7 +225,7 @@
         <scene sceneID="Vzn-oo-Ikb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="12m-HL-xL8" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Collection" id="MwB-xY-KW9"/>
+                    <tabBarItem key="tabBarItem" title="Collection" image="ic_collection" selectedImage="ic_collection" id="MwB-xY-KW9"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wdh-ks-KVG">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
@@ -241,6 +245,8 @@
         <segue reference="bY3-Pd-fqy"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="ic_collection" width="25" height="25"/>
+        <image name="ic_table" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -12,6 +12,26 @@ class FirstTabViewController: UIViewController, UITableViewDataSource {
     var movies: [Movie] = []
     let cellIdentifier = "firstTabTableCell"
     @IBOutlet weak var tableView: UITableView!
+
+    @IBAction func touchUpOrderTypeButton(_ sender: UIButton) {
+        let alert = UIAlertController(title: "정렬방식선택", message: "선택해주세요.", preferredStyle: UIAlertController.Style.actionSheet)
+        alert.addAction(UIAlertAction(title: "예매율순(기본)", style: .default, handler: { _ in
+            SettingInfo.shared.orderType = .reservationRate
+            requestMovies(orderType: SettingInfo.shared.orderType.rawValue)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("추천순", comment: "큐레이터가 추천한 순서"), style: .default, handler: { _ in
+            SettingInfo.shared.orderType = .curation
+            requestMovies(orderType: SettingInfo.shared.orderType.rawValue)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("개봉일순", comment: "개봉날짜순"), style: .default, handler: { _ in
+            SettingInfo.shared.orderType = .date
+            requestMovies(orderType: SettingInfo.shared.orderType.rawValue)
+        }))
+        
+        self.present(alert, animated: true, completion: {
+            self.navigationItem.title = orderTypeDescription(SettingInfo.shared.orderType)
+        })
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
