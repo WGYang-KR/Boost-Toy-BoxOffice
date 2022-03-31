@@ -7,7 +7,8 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITableViewDataSource {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +16,14 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        <#code#>
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        <#code#>
+    }
+    
     /*
     // MARK: - Navigation
 
