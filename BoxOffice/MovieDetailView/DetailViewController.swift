@@ -10,6 +10,11 @@ import UIKit
 class DetailViewController: UIViewController, UITableViewDataSource {
     
 
+    var comments: [Comment] = []
+    let detailCellIdentifier = "detailCell"
+    let commentCellIdentifier = "commentCell"
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,11 +22,30 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        switch section {
+        case 0: return 1
+        case 1: return self.comments.count
+        default: return 0
+        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        switch indexPath.section {
+        case 0:
+            guard let cell: DetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: detailCellIdentifier, for: indexPath) as?  DetailTableViewCell else { fatalError("The dequeued cell is not an instance of DetailCell.") }
+            return cell
+        case 1:
+            guard let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: commentCellIdentifier, for: indexPath) as? CommentTableViewCell else {
+                fatalError("The dequeued cell is not an instance of CommentTableViewCell.")
+            }
+
+            return cell
+
+        default:
+            fatalError("The IndexPath is not 0 or 1.")
+        }
+      
     }
     
     /*

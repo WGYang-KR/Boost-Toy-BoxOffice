@@ -476,6 +476,9 @@
                         <barButtonItem key="backBarButtonItem" title="영화 목록" id="8y2-yZ-aPP"/>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="2Nr-e7-V1W" id="47v-EL-6H0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qze-ue-8Zq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

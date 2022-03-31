@@ -1,7 +1,7 @@
 //
-//  Model.swift
+//  Movie.swift
 //  BoxOffice
-//  Movies, Movie, Moviedetail 구조체
+//  Movies, Movie 구조체
 //  Created by WG Yang on 2022/03/24.
 //
 

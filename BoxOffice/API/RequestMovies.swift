@@ -1,14 +1,30 @@
 //
 //  DownData.swift
 //  BoxOffice
-//  영화정보 다운로드
+//  영화목록 다운로드
 //  Created by WG Yang on 2022/03/24.
-//
+//  Notification 사용
 
 import Foundation
 
 let DidReceiveMoviesNotification: Notification.Name = Notification.Name("DisReceiveMovies")
 
+enum OrderType: Int {
+    case reservationRate //예매율
+    case curation //추천순
+    case date //개봉일순
+}
+
+func orderTypeDescription(_ orderType :OrderType) -> String {
+    switch orderType {
+    case .reservationRate:
+        return "예매율순"
+    case .curation:
+        return "추천순"
+    case .date:
+        return "개봉일순"
+    }
+}
 
 func requestMovies(orderType: Int) {
         
