@@ -7,10 +7,10 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, UITableViewDataSource {
+class DetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
 
-    let movieID: String = "5a54c286e8a71d136fb5378e"
+    var movieID: String!
     var movieDetail: MovieDetail?
     var comments: [Comment] = []
     let detailCellIdentifier = "detailCell"
@@ -36,6 +36,14 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         print("viewDidLoad에서 requestMovieDetail 호출 끝")
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0: return UITableView.automaticDimension
+        case 1: return 150
+        default: return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
@@ -45,12 +53,24 @@ class DetailViewController: UIViewController, UITableViewDataSource {
 
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
             print("첫째 섹션 셀 업데이트.")
             guard let cell: DetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: detailCellIdentifier, for: indexPath) as?  DetailTableViewCell else { fatalError("The dequeued cell is not an instance of DetailCell.") }
             cell.titleLabel.text = movieDetail?.title
+            //cell.gradeImageView
+            cell.detailLabel.text = movieDetail?.date
+            //cell.genreDurationLabel.text = movieDetail?
+            //cell.reservationRateLabel = movieDetail?.reservation_rate
+            //cell.userRatingLabel
+            //cell.starRatingView
+            //cell.audienceLabel
+            //cell.synopsisTextField
+            //cell.directorLabel
+            //cell.actorLabel.text = movieDetail?.
             return cell
         case 1:
             guard let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: commentCellIdentifier, for: indexPath) as? CommentTableViewCell else {

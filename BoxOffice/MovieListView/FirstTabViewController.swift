@@ -98,6 +98,15 @@ class FirstTabViewController: UIViewController, UITableViewDataSource {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "Detail" {
+        
+            guard let nextView = segue.destination as? DetailViewController else { return }
+            guard let selectedCell = sender as? FirstTabTableViewCell else { return }
+            guard let indexOfCell = tableView.indexPath(for: selectedCell) else { return
+            }
+            
+            nextView.movieID = movies[indexOfCell.row].id
+        }
     }
     
 
