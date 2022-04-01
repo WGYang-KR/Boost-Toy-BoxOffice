@@ -10,6 +10,8 @@ import UIKit
 class DetailViewController: UIViewController, UITableViewDataSource {
     
 
+    let movieID: String = "5a54c286e8a71d136fb5378e"
+    var movieDetail: MovieDetail?
     var comments: [Comment] = []
     let detailCellIdentifier = "detailCell"
     let commentCellIdentifier = "commentCell"
@@ -19,6 +21,19 @@ class DetailViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        //자체적으로 asnc로 진행되는 지 확인.
+        print("viewDidLoad에서 requestMovieDetail 호출 시작")
+        requestMovieDetail(movieID) { detail in
+            if let detail = detail {
+                print("requestMovieDetail completion() 시작.")
+                self.movieDetail = detail
+                DispatchQueue.main.async {
+                    self.tableView.reloadSections(IndexSet(0...0), with: .none)
+                }
+                print("requestMovieDetail completion() 끝.")
+            }
+        }
+        print("viewDidLoad에서 requestMovieDetail 호출 끝")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,7 +48,9 @@ class DetailViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
+            print("첫째 섹션 셀 업데이트.")
             guard let cell: DetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: detailCellIdentifier, for: indexPath) as?  DetailTableViewCell else { fatalError("The dequeued cell is not an instance of DetailCell.") }
+            cell.titleLabel.text = movieDetail?.title
             return cell
         case 1:
             guard let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: commentCellIdentifier, for: indexPath) as? CommentTableViewCell else {
