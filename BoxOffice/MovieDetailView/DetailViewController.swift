@@ -71,6 +71,24 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             //cell.synopsisTextField
             //cell.directorLabel
             //cell.actorLabel.text = movieDetail?.
+            
+            DispatchQueue.global().async {
+            
+                guard let movieDetailImageURL = self.movieDetail?.image else {
+                    return
+                }
+                guard let imageURL: URL = URL(string: movieDetailImageURL) else { return }
+                guard let imageData: Data = try? Data(contentsOf: imageURL) else { return }
+                //일정한 크기로 조정
+                
+                DispatchQueue.main.async {
+                    if let index = self.tableView.indexPath(for: cell) {
+                        if index.row == indexPath.row {
+                            cell.thumbImageView.image = UIImage(data: imageData)
+                        }
+                    }
+                }
+            }
             return cell
         case 1:
             guard let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: commentCellIdentifier, for: indexPath) as? CommentTableViewCell else {

@@ -46,10 +46,14 @@ func requestMovies(orderType: Int) {
                 print("에러 dataTask에서 data 안넘어옴")
                 return
             }
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP Response Status Code: \(httpResponse.statusCode)")
+            }
             
             do { let moviesResponse: MoviesResponse
                 = try JSONDecoder().decode(MoviesResponse.self, from: data)
                 
+                print("DataTask Handler: JSON DECODE 완료")
                 NotificationCenter.default.post(name: DidReceiveMoviesNotification, object: nil, userInfo: ["movies": moviesResponse.movies])
               
             } catch(let err) {
