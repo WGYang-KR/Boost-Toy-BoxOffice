@@ -11,7 +11,7 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     
     @IBOutlet weak var userNameLabel: UILabel!
-    @IBOutlet weak var starRatingView: UIView!
+    @IBOutlet weak var starRatingView: StarRatingView!
     @IBOutlet weak var dateTimeLabel: UILabel!
     @IBOutlet weak var contentsLabel: UILabel!
     

@@ -7,38 +7,63 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StarRatingView" customModule="BoxOffice" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StarRatingView" customModule="BoxOffice" customModuleProvider="target">
+            <connections>
+                <outletCollection property="stars" destination="H8H-lf-QX9" collectionClass="NSMutableArray" id="4HN-zF-3oe"/>
+                <outletCollection property="stars" destination="d3V-dh-m11" collectionClass="NSMutableArray" id="SOr-FI-mD8"/>
+                <outletCollection property="stars" destination="cSx-e6-nbT" collectionClass="NSMutableArray" id="gz7-70-U9n"/>
+                <outletCollection property="stars" destination="tsm-Ke-2Nw" collectionClass="NSMutableArray" id="3RP-CG-PU7"/>
+                <outletCollection property="stars" destination="oM2-T5-HSr" collectionClass="NSMutableArray" id="eq8-aq-HoQ"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="125" height="25"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H8H-lf-QX9">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H8H-lf-QX9" userLabel="Star1">
                     <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="H8H-lf-QX9" secondAttribute="height" multiplier="1:1" id="vzq-45-BVN"/>
-                        <constraint firstAttribute="width" constant="25" id="wdu-9Q-q8f"/>
-                    </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d3V-dh-m11">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d3V-dh-m11" userLabel="Star2">
                     <rect key="frame" x="25" y="0.0" width="25" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="3sf-q2-yGb"/>
-                        <constraint firstAttribute="width" secondItem="d3V-dh-m11" secondAttribute="height" multiplier="1:1" id="O3g-2Z-Cor"/>
-                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cSx-e6-nbT" userLabel="Star3">
+                    <rect key="frame" x="50" y="0.0" width="25" height="25"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tsm-Ke-2Nw" userLabel="Star4">
+                    <rect key="frame" x="75" y="0.0" width="25" height="25"/>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oM2-T5-HSr" userLabel="Star5">
+                    <rect key="frame" x="100" y="0.0" width="25" height="25"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="H8H-lf-QX9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Bgy-ON-kVB"/>
-                <constraint firstItem="d3V-dh-m11" firstAttribute="width" secondItem="d3V-dh-m11" secondAttribute="height" multiplier="1:1" id="nO7-P1-D55"/>
-                <constraint firstAttribute="bottom" secondItem="H8H-lf-QX9" secondAttribute="bottom" id="oKf-zR-owH"/>
-                <constraint firstItem="H8H-lf-QX9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zAI-bb-hOp"/>
+                <constraint firstItem="d3V-dh-m11" firstAttribute="width" secondItem="H8H-lf-QX9" secondAttribute="width" id="65J-o6-0Qi"/>
+                <constraint firstItem="tsm-Ke-2Nw" firstAttribute="height" secondItem="H8H-lf-QX9" secondAttribute="height" id="6Oz-5L-IKR"/>
+                <constraint firstItem="cSx-e6-nbT" firstAttribute="leading" secondItem="d3V-dh-m11" secondAttribute="trailing" id="CoB-0f-PXd"/>
+                <constraint firstItem="cSx-e6-nbT" firstAttribute="height" secondItem="H8H-lf-QX9" secondAttribute="height" id="D9T-Gv-c07"/>
+                <constraint firstItem="cSx-e6-nbT" firstAttribute="width" secondItem="H8H-lf-QX9" secondAttribute="width" id="HL9-nx-ZI8"/>
+                <constraint firstItem="tsm-Ke-2Nw" firstAttribute="centerY" secondItem="H8H-lf-QX9" secondAttribute="centerY" id="QD1-DL-5cO"/>
+                <constraint firstItem="H8H-lf-QX9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TlS-fc-GPp"/>
+                <constraint firstItem="oM2-T5-HSr" firstAttribute="centerY" secondItem="H8H-lf-QX9" secondAttribute="centerY" id="Xbf-Fo-U07"/>
+                <constraint firstAttribute="bottom" secondItem="H8H-lf-QX9" secondAttribute="bottom" id="XuV-I2-0ZM"/>
+                <constraint firstItem="oM2-T5-HSr" firstAttribute="width" secondItem="H8H-lf-QX9" secondAttribute="width" id="bqr-ds-Z4v"/>
+                <constraint firstItem="oM2-T5-HSr" firstAttribute="height" secondItem="H8H-lf-QX9" secondAttribute="height" id="diN-oh-7im"/>
+                <constraint firstItem="d3V-dh-m11" firstAttribute="centerY" secondItem="H8H-lf-QX9" secondAttribute="centerY" id="fF2-UL-mUo"/>
+                <constraint firstItem="oM2-T5-HSr" firstAttribute="leading" secondItem="tsm-Ke-2Nw" secondAttribute="trailing" id="fda-nc-nVh"/>
+                <constraint firstItem="H8H-lf-QX9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gvP-VU-p0L"/>
+                <constraint firstItem="tsm-Ke-2Nw" firstAttribute="leading" secondItem="cSx-e6-nbT" secondAttribute="trailing" id="hEq-Os-6M8"/>
+                <constraint firstItem="tsm-Ke-2Nw" firstAttribute="width" secondItem="H8H-lf-QX9" secondAttribute="width" id="hNr-kp-RsY"/>
+                <constraint firstAttribute="trailing" secondItem="oM2-T5-HSr" secondAttribute="trailing" id="leV-1U-X9v"/>
+                <constraint firstItem="d3V-dh-m11" firstAttribute="leading" secondItem="H8H-lf-QX9" secondAttribute="trailing" id="oqB-g3-6C1"/>
+                <constraint firstItem="d3V-dh-m11" firstAttribute="height" secondItem="H8H-lf-QX9" secondAttribute="height" id="pHz-fL-OGL"/>
+                <constraint firstItem="cSx-e6-nbT" firstAttribute="centerY" secondItem="H8H-lf-QX9" secondAttribute="centerY" id="zMo-l6-Utq"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="132" y="83"/>
+            <point key="canvasLocation" x="126.81159420289856" y="82.03125"/>
         </view>
     </objects>
     <resources>

@@ -47,6 +47,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             }
             print("Comment loading completed")
         }
+        
     }
     
     //MARK: 한줄평 헤더
@@ -96,7 +97,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return 1
+        case 0: if movieDetail != nil { return 1 } else { return 0}
         case 1: print("comments.count: \(comments.count)")
             return self.comments.count
 
@@ -124,7 +125,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             cell.synopsisLabel.text = movieDetail?.synopsis
             cell.directorLabel.text = movieDetail?.director
             cell.actorLabel.text = movieDetail?.actor
-            
+            if let starRate = movieDetail?.user_rating {
+                cell.starRatingView.setupStarRating(rating: starRate)
+                
+            }
             DispatchQueue.global().async {
             
                 guard let movieDetailImageURL = self.movieDetail?.image else {
@@ -151,6 +155,8 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             cell.userNameLabel.text = comments[indexPath.row].writer
             cell.contentsLabel.text = comments[indexPath.row].contents
             cell.dateTimeLabel.text = comments[indexPath.row].dateTimeDescription
+            cell.starRatingView.setupStarRating(rating: comments[indexPath.row].rating )
+        
             return cell
 
         default:

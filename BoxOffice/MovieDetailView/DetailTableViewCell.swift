@@ -17,17 +17,11 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var genreDurationLabel: UILabel!
     @IBOutlet weak var reservationRateLabel: UILabel!
     @IBOutlet weak var userRatingLabel: UILabel!
-    
-    @IBOutlet weak var starRatingView: UIView!
-    
     @IBOutlet weak var audienceLabel: UILabel!
-    
     @IBOutlet weak var synopsisLabel: UILabel!
-    
     @IBOutlet weak var directorLabel: UILabel!
-    
     @IBOutlet weak var actorLabel: UILabel!
-    
+    @IBOutlet weak var starRatingView: StarRatingView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
