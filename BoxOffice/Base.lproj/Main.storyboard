@@ -42,7 +42,7 @@
                                                             <rect key="frame" x="107" y="0.0" width="262" height="144"/>
                                                             <subviews>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="V9X-J3-nnz">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="145" height="54"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="116" height="54"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="영 화 제 목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7h-VX-f5g">
                                                                             <rect key="frame" x="0.0" y="0.0" width="79" height="54"/>
@@ -51,10 +51,8 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_12" translatesAutoresizingMaskIntoConstraints="NO" id="Xjl-8G-YLi">
-                                                                            <rect key="frame" x="91" y="0.0" width="54" height="54"/>
+                                                                            <rect key="frame" x="91" y="0.0" width="25" height="54"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="25" id="Cu2-4n-qq0"/>
-                                                                                <constraint firstAttribute="width" secondItem="Xjl-8G-YLi" secondAttribute="height" multiplier="1:1" id="dro-nA-dE9"/>
                                                                                 <constraint firstAttribute="width" constant="25" id="kUN-fK-xIw"/>
                                                                             </constraints>
                                                                         </imageView>
@@ -109,6 +107,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="정렬 기준" id="V18-Vf-A4O">
+                        <barButtonItem key="backBarButtonItem" title="목록" id="ivL-Tq-VLm"/>
                         <barButtonItem key="rightBarButtonItem" title="설정" id="ZM4-zx-XaI">
                             <connections>
                                 <action selector="touchUpOrderTypeButton:" destination="BYZ-38-t0r" id="0Tr-bl-4QW"/>
@@ -478,9 +477,7 @@
                             <constraint firstItem="hEq-u6-fO3" firstAttribute="bottom" secondItem="2Nr-e7-V1W" secondAttribute="bottom" id="zTG-4w-ysJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="영화 제목" id="nXn-J0-rIr">
-                        <barButtonItem key="backBarButtonItem" title="영화 목록" id="8y2-yZ-aPP"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="영화 상세 정보" id="nXn-J0-rIr"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="2Nr-e7-V1W" id="47v-EL-6H0"/>

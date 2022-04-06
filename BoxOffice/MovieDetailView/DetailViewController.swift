@@ -11,7 +11,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
 
     var movieID: String!
-    var movieDetail: MovieDetail?
+    var movieDetail: MovieDetail? = nil
     var comments: [Comment] = []
     let detailCellIdentifier = "detailCell"
     let commentCellIdentifier = "commentCell"
@@ -24,6 +24,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         
         //자체적으로 asnc로 진행되는 지 확인.
         print("viewDidLoad에서 requestMovieDetail 호출 시작")
@@ -68,14 +69,29 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             let imgView = UIImageView(image: image)
             imgView.frame = CGRect(x: self.view.bounds.width * 0.9, y: 0, width: 25, height: 25)
             
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(touchUpInsideWirteComment(_:)))
+            imgView.isUserInteractionEnabled = true
+            imgView.addGestureRecognizer(tapRecognizer)
+            
             headerView.addSubview(title)
             headerView.addSubview(imgView)
+            
             
             return headerView
         }
         
         return nil
     }
+    
+    //한줄평 등록뷰 이동
+    @objc func touchUpInsideWirteComment(_ sender: UIImageView) {
+           
+        let nextVC = WriteViewController()
+        nextVC.movieDetail = self.movieDetail
+        navigationItem.backButtonTitle = "뒤로"
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 1 {
             return 40
@@ -97,7 +113,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: if movieDetail != nil { return 1 } else { return 0}
+        case 0: if movieDetail != nil { return 1 } else { return 0 }
         case 1: print("comments.count: \(comments.count)")
             return self.comments.count
 
