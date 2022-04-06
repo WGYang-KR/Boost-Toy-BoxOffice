@@ -22,7 +22,7 @@ class DetailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var audienceLabel: UILabel!
     
-    @IBOutlet weak var synopsisTextField: UITextField!
+    @IBOutlet weak var synopsisLabel: UILabel!
     
     @IBOutlet weak var directorLabel: UILabel!
     

@@ -25,4 +25,23 @@ struct MovieDetail: Codable {
     let date: String //개봉일
     let id : String //영화고유ID
     
+    var dateDescription: String {
+        return "\(date) 개봉"
+    }
+    var genreDurationDescription: String {
+        return "\(genre)/\(duration)분"
+    }
+    var reservationRateDescription: String {
+        return "\(reservation_grade)위 \(reservation_rate)%"
+    }
+    var userRatingDescription: String {
+        return String(format: "%.2f", user_rating)
+    }
+    var audienceDescription: String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(from: audience as NSNumber) ?? ""
+    }
+    
 }

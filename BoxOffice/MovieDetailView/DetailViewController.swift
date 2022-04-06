@@ -17,10 +17,14 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     let commentCellIdentifier = "commentCell"
     @IBOutlet weak var tableView: UITableView!
     
+    //영화 썸네일 가로 사이즈
+    let thumbSize: CGFloat = UIScreen.main.bounds.width/3
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
         //자체적으로 asnc로 진행되는 지 확인.
         print("viewDidLoad에서 requestMovieDetail 호출 시작")
         requestMovieDetail(movieID) { detail in
@@ -34,12 +38,58 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
             }
         }
         print("viewDidLoad에서 requestMovieDetail 호출 끝")
+        
+        requestComments(movieID) {
+            comments in
+            self.comments = comments
+            DispatchQueue.main.async {
+                self.tableView.reloadSections(IndexSet(1...1), with: .none)
+            }
+            print("Comment loading completed")
+        }
+    }
+    
+    //MARK: 한줄평 헤더
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if section == 1 {
+            let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40)
+                            )
+            headerView.backgroundColor = UIColor.white
+            
+            let title = UILabel()
+            title.frame = CGRect(x: self.view.bounds.width * 0.02, y: 0, width: 100, height: 40)
+            title.font = UIFont.systemFont(ofSize: 19.0)
+            title.textColor = .black
+            title.text = "한줄평"
+            
+            let image = UIImage(named: "btn_compose")
+            let imgView = UIImageView(image: image)
+            imgView.frame = CGRect(x: self.view.bounds.width * 0.9, y: 0, width: 25, height: 25)
+            
+            headerView.addSubview(title)
+            headerView.addSubview(imgView)
+            
+            return headerView
+        }
+        
+        return nil
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 40
+        }
+        return 0
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0: return UITableView.automaticDimension
-        case 1: return 150
+        case 1: return UITableView.automaticDimension
         default: return 0
         }
     }
@@ -47,7 +97,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return self.comments.count
+        case 1: print("comments.count: \(comments.count)")
+            return self.comments.count
+
         default: return 0
         }
 
@@ -60,17 +112,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         case 0:
             print("첫째 섹션 셀 업데이트.")
             guard let cell: DetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: detailCellIdentifier, for: indexPath) as?  DetailTableViewCell else { fatalError("The dequeued cell is not an instance of DetailCell.") }
+
             cell.titleLabel.text = movieDetail?.title
             //cell.gradeImageView
             cell.detailLabel.text = movieDetail?.date
-            //cell.genreDurationLabel.text = movieDetail?
-            //cell.reservationRateLabel = movieDetail?.reservation_rate
-            //cell.userRatingLabel
+            cell.genreDurationLabel.text = movieDetail?.genreDurationDescription
+            cell.reservationRateLabel.text = movieDetail?.reservationRateDescription
+            cell.userRatingLabel.text = movieDetail?.userRatingDescription
             //cell.starRatingView
-            //cell.audienceLabel
-            //cell.synopsisTextField
-            //cell.directorLabel
-            //cell.actorLabel.text = movieDetail?.
+            cell.audienceLabel.text = movieDetail?.audienceDescription
+            cell.synopsisLabel.text = movieDetail?.synopsis
+            cell.directorLabel.text = movieDetail?.director
+            cell.actorLabel.text = movieDetail?.actor
             
             DispatchQueue.global().async {
             
@@ -95,6 +148,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 fatalError("The dequeued cell is not an instance of CommentTableViewCell.")
             }
 
+            cell.userNameLabel.text = comments[indexPath.row].writer
+            cell.contentsLabel.text = comments[indexPath.row].contents
+            cell.dateTimeLabel.text = comments[indexPath.row].dateTimeDescription
             return cell
 
         default:
