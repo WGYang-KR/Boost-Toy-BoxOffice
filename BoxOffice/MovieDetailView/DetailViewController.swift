@@ -113,7 +113,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: if movieDetail != nil { return 1 } else { return 0 }
+        case 0: return 1
         case 1: print("comments.count: \(comments.count)")
             return self.comments.count
 

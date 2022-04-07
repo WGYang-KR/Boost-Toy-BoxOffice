@@ -10,6 +10,7 @@ import UIKit
 class WriteViewController: UIViewController {
 
     var movieDetail: MovieDetail!
+    var sliderStarRating: StarRatingUISlider!
     
     @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var starRatingView: StarRatingView!
@@ -17,12 +18,18 @@ class WriteViewController: UIViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var commentTextField: UITextField!
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    override func viewDidLayoutSubviews() {
+        //StarRating과 크기 같게
+        sliderStarRating.frame = self.starRatingView.frame
+        //sliderStarRating.bounds = self.starRatingView.bounds
+        print("vieDidLayout slider: \(sliderStarRating.frame)\nstarRatingView:\(self.starRatingView.frame)")
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        
-    
-        
-        
     
     }
     override func viewDidLoad() {
@@ -38,7 +45,45 @@ class WriteViewController: UIViewController {
         
         navigationItem.rightBarButtonItems = [completeBarButton]
         
+        
+        //평점 초기값 설정.
        
+        self.rateLabel.text = String(format:"%.1f",self.movieDetail.user_rating)
+        reloadStarRatingView()
+        
+        //슬라이더 별점 위에 추가
+        sliderStarRating = StarRatingUISlider()
+        
+        //숨기기
+        sliderStarRating.minimumTrackTintColor = .clear
+        sliderStarRating.maximumTrackTintColor = .clear
+        sliderStarRating.thumbTintColor = .clear
+        //최대, 최소, 초기값
+        sliderStarRating.maximumValue = 10
+        sliderStarRating.minimumValue = 0
+        sliderStarRating.value = Float(self.movieDetail.user_rating)
+        //action연결
+        sliderStarRating.addTarget(self, action: #selector(sliderValueChanged(_:)), for: UIControl.Event.valueChanged)
+    
+        //별 이미지 뷰 위로 추가
+        self.view.insertSubview(sliderStarRating, aboveSubview: self.starRatingView )
+        print("viewDidLoad::\nslider: \(sliderStarRating.frame)\nstarRatingView:\(self.starRatingView.frame)")
+        
+        
+        
+       
+    }
+
+    @IBAction func sliderValueChanged(_ sender: StarRatingUISlider) {
+        print("slider value changed")
+        self.rateLabel.text = String(format:"%.1f",sender.value)
+        reloadStarRatingView()
+    }
+    
+    func reloadStarRatingView() {
+        if let newRate = Double(self.rateLabel.text ?? "") {
+            self.starRatingView.setupStarRating(rating: newRate)
+        }
     }
 
     @objc func touchUpCompleteBarButton(_ sender: UIBarButtonItem) {
