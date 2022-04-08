@@ -28,6 +28,7 @@ class WriteViewController: UIViewController {
         //sliderStarRating.bounds = self.starRatingView.bounds
         print("vieDidLayout slider: \(sliderStarRating.frame)\nstarRatingView:\(self.starRatingView.frame)")
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        

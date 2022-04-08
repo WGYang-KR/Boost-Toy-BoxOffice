@@ -33,7 +33,11 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 print("requestMovieDetail completion() 시작.")
                 self.movieDetail = detail
                 DispatchQueue.main.async {
+                    print("#reloadSection 0 Start")
+                    print("comments.count: \(self.comments.count)")
                     self.tableView.reloadSections(IndexSet(0...0), with: .none)
+                    print("#reloadSection 0 End")
+                    print("comments.count: \(self.comments.count)")
                 }
                 print("requestMovieDetail completion() 끝.")
             }
@@ -46,9 +50,13 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func refreshComments() {
         requestComments(self.movieID) {
             comments in
-            self.comments = comments
             DispatchQueue.main.async {
+                self.comments = comments //section 0 변경중 변경되면 error 발생-> dispatchQueue에서 진행
+                print("reloadSection 1 Start")
+                print("comments.count: \(comments.count)")
                 self.tableView.reloadSections(IndexSet(1...1), with: .none)
+                print("reloadSection 1 End")
+                print("comments.count: \(comments.count)")
             }
             print("Comments loading completed")
         }
@@ -120,11 +128,17 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return 1
-        case 1: print("comments.count: \(comments.count)")
+        case 0:
+            print("numberOfRowsInSection 0")
+            return 1
+        case 1:
+            print("numberOfRowsInSection 1")
+            print("comments.count: \(comments.count)")
             return self.comments.count
 
-        default: return 0
+        default:
+            print("numberOfRowsInSection default")
+            return 0
         }
 
     }
@@ -134,7 +148,6 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            print("첫째 섹션 셀 업데이트.")
             guard let cell: DetailTableViewCell = tableView.dequeueReusableCell(withIdentifier: detailCellIdentifier, for: indexPath) as?  DetailTableViewCell else { fatalError("The dequeued cell is not an instance of DetailCell.") }
 
             cell.titleLabel.text = movieDetail?.title
@@ -170,6 +183,7 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
                 }
             }
             return cell
+            
         case 1:
             guard let cell: CommentTableViewCell = tableView.dequeueReusableCell(withIdentifier: commentCellIdentifier, for: indexPath) as? CommentTableViewCell else {
                 fatalError("The dequeued cell is not an instance of CommentTableViewCell.")
