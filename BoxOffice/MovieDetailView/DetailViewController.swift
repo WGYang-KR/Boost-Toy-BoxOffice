@@ -40,15 +40,18 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         }
         print("viewDidLoad에서 requestMovieDetail 호출 끝")
         
-        requestComments(movieID) {
+      refreshComments()
+    }
+    
+    func refreshComments() {
+        requestComments(self.movieID) {
             comments in
             self.comments = comments
             DispatchQueue.main.async {
                 self.tableView.reloadSections(IndexSet(1...1), with: .none)
             }
-            print("Comment loading completed")
+            print("Comments loading completed")
         }
-        
     }
     
     //MARK: 한줄평 헤더
@@ -89,6 +92,9 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         //MARK: Push WriteViewController
         let nextVC = WriteViewController()
         nextVC.movieDetail = self.movieDetail
+        nextVC.callBack = {
+            self.refreshComments()
+        }
         navigationItem.backButtonTitle = "뒤로"
         navigationController?.pushViewController(nextVC, animated: true)
     }

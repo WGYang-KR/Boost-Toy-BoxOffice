@@ -11,6 +11,7 @@ class WriteViewController: UIViewController {
 
     var movieDetail: MovieDetail!
     var sliderStarRating: StarRatingUISlider!
+    var callBack: (() -> Void)?
     
     @IBOutlet weak var movieNameLabel: UILabel!
     @IBOutlet weak var starRatingView: StarRatingView!
@@ -107,11 +108,17 @@ class WriteViewController: UIViewController {
         }
     }
 
+    //MARK: 완료 여부 Alert
     func alertUploadStatus(_ status: Bool) {
         
         let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
         let okSuccessAlertAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default) { _ in
             print("네비게이션 pop")
+            
+            if let callBack = self.callBack {
+                print("CallBack 실행.")
+                callBack() //이전 뷰 새로고침
+            }
             self.navigationController?.popViewController(animated: true)
         }
         let okFailAlertAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default) { _ in
