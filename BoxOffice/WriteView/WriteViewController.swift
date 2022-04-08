@@ -87,10 +87,47 @@ class WriteViewController: UIViewController {
     }
 
     @objc func touchUpCompleteBarButton(_ sender: UIBarButtonItem) {
-            
         print("완료 버튼 클릭됨")
+        
+        //보낼 데이터
+        let commentToPost: CommentToPost = CommentToPost(rating: Double(rateLabel.text ?? "0") ?? 0, writer: userNameTextField.text ?? "_", movieID: movieDetail.id, contents: commentTextField.text ?? "_")
+        
+        //세션통해 전송
+        postComment(commentToPost) { isSuccess in
+            
+            if isSuccess {
+                print("전송완료")
+            } else {
+                print("전송실패")
+            }
+            
+            DispatchQueue.main.async {
+                self.alertUploadStatus(isSuccess)
+            }
+        }
     }
 
+    func alertUploadStatus(_ status: Bool) {
+        
+        let alertController = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+        let okSuccessAlertAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default) { _ in
+            print("네비게이션 pop")
+            self.navigationController?.popViewController(animated: true)
+        }
+        let okFailAlertAction = UIAlertAction(title: "확인", style: UIAlertAction.Style.default) { _ in
+            print("화면 유지")
+        }
+        if status {
+            alertController.title = "전송 성공"
+            alertController.message = "한줄평 등록 성공"
+            alertController.addAction(okSuccessAlertAction)
+        } else {
+            alertController.title = "전송 실패"
+            alertController.message = "한줄평 등록 실패"
+            alertController.addAction(okFailAlertAction)
+        }
+        self.present(alertController, animated: true)
+    }
     /*
     // MARK: - Navigation
 

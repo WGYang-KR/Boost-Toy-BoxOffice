@@ -83,9 +83,10 @@ class DetailViewController: UIViewController, UITableViewDataSource, UITableView
         return nil
     }
     
-    //한줄평 등록뷰 이동
-    @objc func touchUpInsideWirteComment(_ sender: UIImageView) {
-           
+    @objc func touchUpInsideWirteComment(_ sender: UIImageView)
+    {
+          
+        //MARK: Push WriteViewController
         let nextVC = WriteViewController()
         nextVC.movieDetail = self.movieDetail
         navigationItem.backButtonTitle = "뒤로"
